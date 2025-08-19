@@ -1,99 +1,159 @@
 /* Footer.css */
 .footer {
-    background-color: #495E57;
-    padding: 2vh 0;
-    border-top: 2px solid #F4CE14;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #3d4f47 100%);
+    padding: var(--spacing-6) 0;
+    border-top: 3px solid var(--color-secondary);
+    box-shadow: var(--shadow-lg);
     margin-top: auto;
     width: 100%;
-    min-height: 15vh;
+    min-height: 18vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
 }
 
 .footer-content {
     max-width: 90vw;
     margin: 0 auto;
-    padding: 0 2vw;
+    padding: 0 var(--spacing-6);
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 2vw;
-    min-height: 15vh;
+    gap: var(--spacing-6);
+    min-height: 18vh;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-section {
     flex: 1;
-    min-width: 250px;
+    min-width: 280px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: var(--spacing-4);
+    transition: all var(--transition-normal);
+}
+
+.footer-section:hover {
+    transform: translateY(-2px);
 }
 
 .footer-section h3 {
-    color: #F4CE14;
+    color: var(--color-secondary);
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    margin-bottom: 1vh;
-    letter-spacing: 0.5px;
+    font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+    margin-bottom: var(--spacing-4);
+    letter-spacing: 0.02em;
+    font-weight: var(--font-weight-semibold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .footer-section p {
-    color: white;
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
-    margin: 0.5vh 0;
-    line-height: 1.4;
-    transition: color 0.3s ease;
+    color: var(--color-background);
+    font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
+    margin: var(--spacing-2) 0;
+    line-height: var(--line-height-relaxed);
+    transition: all var(--transition-normal);
+    font-weight: var(--font-weight-normal);
+    cursor: pointer;
 }
 
 .footer-section p:hover {
     color: #fff2ae;
-    cursor: pointer;
+    transform: translateX(4px);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .footer {
-        padding: 1.5vh 0;
-        min-height: 18vh;
+        padding: var(--spacing-5) 0;
+        min-height: 20vh;
     }
     
     .footer-content {
-        padding: 0 1.5vw;
+        padding: 0 var(--spacing-4);
         flex-direction: column;
-        gap: 1.5vh;
-        min-height: 18vh;
+        gap: var(--spacing-4);
+        min-height: 20vh;
     }
     
     .footer-section {
         min-width: auto;
+        padding: var(--spacing-3);
     }
     
     .footer-section h3 {
-        font-size: clamp(0.9rem, 3vw, 1.3rem);
+        font-size: clamp(var(--font-size-base), 4vw, var(--font-size-lg));
+        margin-bottom: var(--spacing-3);
     }
     
     .footer-section p {
-        font-size: clamp(0.75rem, 2.5vw, 1rem);
+        font-size: clamp(var(--font-size-sm), 3.5vw, var(--font-size-base));
+        margin: var(--spacing-1) 0;
     }
 }
 
 @media (max-width: 480px) {
     .footer {
-        padding: 1vh 0;
-        min-height: 20vh;
+        padding: var(--spacing-4) 0;
+        min-height: 22vh;
     }
     
     .footer-content {
-        padding: 0 1vw;
-        gap: 1vh;
-        min-height: 20vh;
+        padding: 0 var(--spacing-3);
+        gap: var(--spacing-3);
+        min-height: 22vh;
+    }
+    
+    .footer-section {
+        padding: var(--spacing-2);
     }
     
     .footer-section h3 {
-        font-size: clamp(0.8rem, 3.5vw, 1.1rem);
+        font-size: clamp(var(--font-size-sm), 4.5vw, var(--font-size-base));
+        margin-bottom: var(--spacing-2);
     }
     
     .footer-section p {
-        font-size: clamp(0.7rem, 3vw, 0.9rem);
+        font-size: clamp(var(--font-size-xs), 4vw, var(--font-size-sm));
+        margin: var(--spacing-1) 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer {
+        padding: var(--spacing-3) 0;
+        min-height: 24vh;
+    }
+    
+    .footer-content {
+        padding: 0 var(--spacing-2);
+        gap: var(--spacing-2);
+        min-height: 24vh;
+    }
+    
+    .footer-section {
+        padding: var(--spacing-2);
+    }
+    
+    .footer-section h3 {
+        font-size: clamp(var(--font-size-xs), 5.5vw, var(--font-size-sm));
+        margin-bottom: var(--spacing-1);
+    }
+    
+    .footer-section p {
+        font-size: clamp(var(--font-size-xs), 4.5vw, var(--font-size-sm));
+        margin: var(--spacing-1) 0;
     }
 }

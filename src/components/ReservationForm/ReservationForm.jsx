@@ -223,29 +223,30 @@ const ReservationForm = () => {
 
           <div className="form-group">
             <label htmlFor="time">Time *</label>
-            <select
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleTimeChange}
-              required
-              className={`form-input ${errors.time ? 'error' : ''}`}
-              disabled={!formData.date || availableTimes.length === 0}
-            >
-              <option value="">
-                {!formData.date 
-                  ? 'Please select a date first' 
-                  : availableTimes.length === 0 
-                    ? 'No available times for this date' 
-                    : 'Select a time'
-                }
-              </option>
-              {availableTimes.map((time) => (
-                <option key={time.value} value={time.value}>
-                  {time.label}
-                </option>
-              ))}
-            </select>
+            <div className="time-radio-group">
+              {!formData.date ? (
+                <p className="time-placeholder">Please select a date first</p>
+              ) : availableTimes.length === 0 ? (
+                <p className="time-placeholder">No available times for this date</p>
+              ) : (
+                availableTimes.map((time) => (
+                  <div key={time.value} className="radio-option">
+                    <input
+                      type="radio"
+                      id={`time-${time.value}`}
+                      name="time"
+                      value={time.value}
+                      checked={formData.time === time.value}
+                      onChange={handleTimeChange}
+                      className="radio-input"
+                    />
+                    <label htmlFor={`time-${time.value}`} className="radio-label">
+                      {time.label}
+                    </label>
+                  </div>
+                ))
+              )}
+            </div>
             {errors.time && <span className="error-message">{errors.time}</span>}
           </div>
 

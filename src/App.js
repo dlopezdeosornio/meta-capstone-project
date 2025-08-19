@@ -6,6 +6,7 @@ import Homepage from './components/Homepage/Homepage';
 import ReservationForm from './components/ReservationForm/ReservationForm';
 import Footer from './components/Footer/Footer';
 import Menu from './components/Menu/Menu';
+import ContactSection from './components/Contact/Contact';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Homepage/>} />
           <Route path="/reserve" element={<ReservationForm/>} />
           <Route path="/menu" element={<Menu/>} />
+          <Route path="/contact" element={<ContactSection/>} />
         </Routes>
         <Footer/>
       </div>

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Homepage from './components/Homepage/Homepage';
-import ReserveATable from './components/Reserve a table/ReserveATable';
+import ReservationForm from './components/ReservationForm/ReservationForm';
 import Footer from './components/Footer/Footer';
 import Menu from './components/Menu/Menu';
 
@@ -15,7 +15,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Homepage/>} />
-          <Route path="/reserve" element={<ReserveATable/>} />
+          <Route path="/reserve" element={<ReservationForm/>} />
           <Route path="/menu" element={<Menu/>} />
         </Routes>
         <Footer/>

@@ -1,0 +1,214 @@
+/* Reserve a Table Page Styles */
+.reserve-table-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 2rem 1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.reserve-table-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(73, 94, 87, 0.15);
+  padding: 3rem 2rem;
+  border: 2px solid #F4CE14;
+}
+
+.reserve-table-content h1 {
+  color: #495E57;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+}
+
+.reserve-table-content p {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* Form Styles */
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #495E57;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.form-input {
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #F4CE14;
+  box-shadow: 0 0 0 3px rgba(244, 206, 20, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-input:hover {
+  border-color: #F4CE14;
+  transform: translateY(-1px);
+}
+
+.form-input:required {
+  border-left: 4px solid #F4CE14;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: linear-gradient(135deg, #F4CE14 0%, #f0c800 100%);
+  color: #495E57;
+  border: none;
+  padding: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(244, 206, 20, 0.3);
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #f0c800 0%, #F4CE14 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(244, 206, 20, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(244, 206, 20, 0.3);
+}
+
+/* Select dropdown styling */
+.form-input option {
+  background: white;
+  color: #2c3e50;
+  padding: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reserve-table-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .reserve-table-content {
+    padding: 2rem 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .reserve-table-content h1 {
+    font-size: 2rem;
+  }
+  
+  .reserve-table-content p {
+    font-size: 1.1rem;
+  }
+  
+  .form-input {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+  
+  .submit-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reserve-table-content {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+  
+  .reserve-table-content h1 {
+    font-size: 1.75rem;
+  }
+  
+  .reserve-table-content p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-group {
+    gap: 0.375rem;
+  }
+  
+  .form-input {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Animation for form elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+.submit-btn {
+  animation: fadeInUp 0.6s ease 0.5s forwards;
+  opacity: 0;
+}
+
+/* Focus states for accessibility */
+.form-input:focus-visible {
+  outline: 2px solid #F4CE14;
+  outline-offset: 2px;
+}
+
+.submit-btn:focus-visible {
+  outline: 2px solid #495E57;
+  outline-offset: 2px;
+}

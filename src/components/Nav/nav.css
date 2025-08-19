@@ -1,0 +1,36 @@
+.nav {
+    background-color: #495E57;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav li {
+    color: #f4ce14;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav li:hover {
+    color: #fff2ae;
+}
+
+.nav li a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav li a:hover {
+    color: #fff2ae;
+}

@@ -3,12 +3,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 1rem;
-    padding: 1rem 2rem;
+    gap: 1vw;
+    padding: 1vh 2vw;
     background-color: #495E57;
     border-bottom: 2px solid #F4CE14;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
+    min-height: 10vh;
+}
   
 .header .logo-container {
     display: flex;
@@ -22,42 +23,60 @@
 }
 
 .header .logo-container img {
-    height: 1.8rem;         /* match h1 font-size height */
+    height: clamp(1.5rem, 3vh, 2.5rem);
     width: auto;
     background-color: white;
-    padding: 0.5rem;
+    padding: 0.5vh;
     border-radius: 0.5rem;
     object-fit: cover;
-    flex-shrink: 0;         /* don't let logo shrink oddly */
-  }
+    flex-shrink: 0;
+}
   
-  .header h1 {
+.header h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 3vw, 2rem);
     color: #F4CE14;
     margin: 0;
     letter-spacing: 1px;
     white-space: nowrap;
-  }
+}
   
-  /* Optional: make it scale on very small screens without breaking row */
-  @media (max-width: 400px) {
+/* Responsive design */
+@media (max-width: 768px) {
     .header {
-      padding: 0.75rem 1rem;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+        padding: 1.5vh 2vw;
+        min-height: 12vh;
+        gap: 1.5vw;
     }
     
     .header .logo-container img {
-      height: 1.5rem;
-      padding: 0.4rem;
+        height: clamp(1.3rem, 3.5vh, 2rem);
+        padding: 0.6vh;
     }
   
     .header h1 {
-      font-size: 1.5rem;
-      white-space: normal;
-      word-wrap: break-word;
-      max-width: 100%;
+        font-size: clamp(1rem, 4vw, 1.5rem);
     }
-  }
+}
+
+@media (max-width: 400px) {
+    .header {
+        padding: 2vh 2vw;
+        min-height: 15vh;
+        gap: 2vw;
+        flex-wrap: wrap;
+    }
+    
+    .header .logo-container img {
+        height: clamp(1.1rem, 4vh, 1.5rem);
+        padding: 0.8vh;
+    }
+  
+    .header h1 {
+        font-size: clamp(0.9rem, 5vw, 1.3rem);
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+    }
+}
   

@@ -1,7 +1,11 @@
 .nav {
     background-color: #495E57;
-    padding: 1rem 0;
+    padding: 1vh 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav ul {
@@ -11,7 +15,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2vw;
+    height: 100%;
 }
 
 .nav li {
@@ -19,6 +24,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: color 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 .nav li:hover {
@@ -33,4 +39,36 @@
 
 .nav li a:hover {
     color: #fff2ae;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav {
+        padding: 1.5vh 0;
+        min-height: 10vh;
+    }
+    
+    .nav ul {
+        gap: 3vw;
+    }
+    
+    .nav li {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        padding: 2vh 0;
+        min-height: 12vh;
+    }
+    
+    .nav ul {
+        gap: 4vw;
+        flex-wrap: wrap;
+    }
+    
+    .nav li {
+        font-size: clamp(0.7rem, 4vw, 0.9rem);
+    }
 }

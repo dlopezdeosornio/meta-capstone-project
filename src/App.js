@@ -5,6 +5,7 @@ import Nav from './components/Nav/Nav';
 import Homepage from './components/Homepage/Homepage';
 import ReserveATable from './components/Reserve a table/ReserveATable';
 import Footer from './components/Footer/Footer';
+import Menu from './components/Menu/Menu';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage/>} />
           <Route path="/reserve" element={<ReserveATable/>} />
+          <Route path="/menu" element={<Menu/>} />
         </Routes>
         <Footer/>
       </div>

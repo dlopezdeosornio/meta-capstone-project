@@ -1,24 +1,25 @@
 /* Main container styles */
 .main {
-    max-width: 1200px;
+    max-width: 90vw;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2vh 2vw;
     font-family: 'Arial', sans-serif;
+    min-height: 70vh;
 }
 
 /* Main heading */
 .main h1 {
     text-align: center;
     color: #333;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 2vh;
     font-weight: bold;
 }
 
 /* Article sections */
 .new-menu, .weekly-specials {
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin-bottom: 3vh;
+    padding: 2vh 2vw;
     background: #f8f9fa;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -27,8 +28,8 @@
 /* Section headings */
 .new-menu h2, .weekly-specials h2 {
     color: #2c3e50;
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 1vh;
     text-align: center;
     font-weight: 600;
 }
@@ -36,10 +37,10 @@
 /* Section paragraphs */
 .new-menu p, .weekly-specials p {
     color: #555;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
     line-height: 1.6;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2vh;
 }
 
 /* Image carousel container */
@@ -47,15 +48,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2vw;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: 2vh;
 }
 
 /* Individual carousel images */
 .image-carousel img {
-    width: 250px;
-    height: 200px;
+    width: clamp(200px, 25vw, 300px);
+    height: clamp(160px, 20vh, 240px);
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -72,44 +73,56 @@
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
     .main {
-        padding: 1rem;
+        padding: 1.5vh 1.5vw;
+        min-height: 75vh;
     }
     
     .main h1 {
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 1.5vh;
     }
     
     .new-menu, .weekly-specials {
-        padding: 1.5rem;
-        margin-bottom: 2rem;
+        padding: 1.5vh 1.5vw;
+        margin-bottom: 2.5vh;
     }
     
     .new-menu h2, .weekly-specials h2 {
-        font-size: 1.5rem;
+        font-size: clamp(1.3rem, 5vw, 2rem);
     }
     
     .new-menu p, .weekly-specials p {
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
     }
     
     .image-carousel {
-        gap: 1rem;
+        gap: 1.5vw;
     }
     
     .image-carousel img {
-        width: 200px;
-        height: 160px;
+        width: clamp(180px, 30vw, 250px);
+        height: clamp(140px, 25vh, 200px);
     }
 }
 
 @media (max-width: 480px) {
+    .main {
+        padding: 1vh 1vw;
+        min-height: 80vh;
+    }
+    
     .image-carousel {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 2vh;
     }
     
     .image-carousel img {
-        width: 280px;
-        height: 220px;
+        width: clamp(250px, 80vw, 300px);
+        height: clamp(200px, 30vh, 250px);
+    }
+    
+    .new-menu, .weekly-specials {
+        padding: 1vh 1vw;
+        margin-bottom: 2vh;
     }
 }

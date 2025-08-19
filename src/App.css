@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -34,5 +37,18 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .App {
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    min-height: 100vh;
   }
 }

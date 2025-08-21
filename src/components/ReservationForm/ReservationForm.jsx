@@ -1,16 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './reservationForm.css';
+import { fetchAPI, submitAPI } from '../../api';
 
 const ReservationForm = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     date: '',
     time: '',
     occasion: '',
-    numberOfPeople: ''
+    numberOfPeople: '',
+    name: '',
+    email: '',
+    phone: ''
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [availableTimes, setAvailableTimes] = useState([]);
+  const [isLoadingTimes, setIsLoadingTimes] = useState(false);
+  const [showCancellationMessage, setShowCancellationMessage] = useState(false);
+
+  // Add useEffect to handle initial setup
+  useEffect(() => {
+    // Check for cancellation notification
+    const cancelled = searchParams.get('cancelled');
+    if (cancelled === 'true') {
+      setShowCancellationMessage(true);
+      // Clear the URL parameter after showing the message
+      navigate('/reserve', { replace: true });
+    }
+
+    // Set today's date as default and fetch available times
+    const today = new Date().toISOString().split('T')[0];
+    setFormData(prevData => ({
+      ...prevData,
+      date: today
+    }));
+    
+    // Fetch available times for today
+    const selectedDate = new Date(today + 'T00:00:00');
+    const times = fetchAPI(selectedDate);
+    
+
+    
+    // Filter out times that have already passed using UTC time
+    const now = new Date();
+    const currentHour = now.getUTCHours();
+    const currentMinute = now.getUTCMinutes();
+    
+    const filteredTimes = times.filter(time => {
+      const [hours, minutes] = time.split(':').map(Number);
+      
+      // Convert to UTC for comparison
+      const timeToCheck = new Date();
+      timeToCheck.setUTCHours(hours, minutes, 0, 0);
+      
+      // Check if the time is in the future
+      if (hours > currentHour) {
+        return true; // Future hour
+      } else if (hours === currentHour && minutes > currentMinute) {
+        return true; // Same hour but future minute
+      }
+      return false; // Past time
+    });
+    
+
+    setAvailableTimes(filteredTimes);
+  }, [searchParams, navigate]);
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +101,16 @@ const ReservationForm = () => {
     
     if (!formData.numberOfPeople) {
       newErrors.numberOfPeople = 'Number of people is required';
+    }
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
     
     // Additional validation for same-day reservations
@@ -74,20 +144,36 @@ const ReservationForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Use the API to submit the reservation
+      const result = await submitAPI(formData);
       
-      console.log('Reservation submitted:', formData);
-      alert('Reservation submitted successfully!');
-      
-      // Reset form after successful submission
-      setFormData({
-        date: '',
-        time: '',
-        occasion: '',
-        numberOfPeople: ''
-      });
-      setErrors({});
+      if (result.success) {
+        console.log('Reservation submitted:', formData);
+        
+        // Navigate to confirmation page with form data as URL parameters
+        const params = new URLSearchParams({
+          date: formData.date,
+          time: formData.time,
+          occasion: formData.occasion,
+          numberOfPeople: formData.numberOfPeople,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone
+        });
+        
+        // Navigate to confirmation page
+        navigate(`/booking-confirmation?${params.toString()}`);
+        
+        // Note: Form will be reset when user navigates away, so no need to reset here
+
+      } else {
+        alert(result.message);
+        // Reset time selection if the slot is no longer available
+        setFormData(prevData => ({
+          ...prevData,
+          time: ''
+        }));
+      }
     } catch (error) {
       console.error('Error submitting reservation:', error);
       alert('There was an error submitting your reservation. Please try again.');
@@ -98,6 +184,8 @@ const ReservationForm = () => {
 
   const handleDateChange = (e) => {
     const { value } = e.target;
+    
+
 
     setFormData(prevData => ({
       ...prevData,
@@ -110,6 +198,56 @@ const ReservationForm = () => {
         ...prevErrors,
         date: ''
       }));
+    }
+    
+    // Fetch available times for the selected date
+    if (value) {
+      setIsLoadingTimes(true);
+      
+      // Simulate a small delay to show loading state
+      setTimeout(() => {
+        const selectedDate = new Date(value + 'T00:00:00');
+        const times = fetchAPI(selectedDate);
+        
+
+        
+        // Filter out times that have already passed if it's today
+        const now = new Date();
+        const isToday = selectedDate.toDateString() === now.toDateString();
+        
+        if (isToday) {
+          // For today, only show future time slots based on current UTC time
+          const currentHour = now.getUTCHours();
+          const currentMinute = now.getUTCMinutes();
+          
+          const filteredTimes = times.filter(time => {
+            const [hours, minutes] = time.split(':').map(Number);
+            
+            // Convert to UTC for comparison
+            const timeToCheck = new Date();
+            timeToCheck.setUTCHours(hours, minutes, 0, 0);
+            
+            // Check if the time is in the future
+            if (hours > currentHour) {
+              return true; // Future hour
+            } else if (hours === currentHour && minutes > currentMinute) {
+              return true; // Same hour but future minute
+            }
+            return false; // Past time
+          });
+          
+
+          setAvailableTimes(filteredTimes);
+        } else {
+          // For future dates, show all available times
+          setAvailableTimes(times);
+        }
+        
+        setIsLoadingTimes(false);
+      }, 300);
+    } else {
+      setAvailableTimes([]);
+      setIsLoadingTimes(false);
     }
   };
 
@@ -129,64 +267,6 @@ const ReservationForm = () => {
     }
   };
 
-// ... existing code ...
-
-  // Generate time options from 12:00 PM to 2:00 PM and 8:00 PM to 10:00 PM
-  const generateTimeOptions = (selectedDate) => {
-    const times = [];
-    const now = new Date();
-    const selectedDateTime = selectedDate ? new Date(selectedDate + 'T00:00:00') : null;
-    
-    // Check if selected date is today by comparing date strings
-    const isToday = selectedDateTime && selectedDateTime.toDateString() === now.toDateString();
-    
-    // Morning/Afternoon times (12:00 PM to 2:00 PM)
-    for (let hour = 12; hour <= 14; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        const timeValue = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        
-        // If it's today, check if the time has already passed
-        if (isToday) {
-          const timeToCheck = new Date();
-          timeToCheck.setHours(hour, minute, 0, 0);
-          if (timeToCheck > now) {
-            times.push({ value: timeValue, label: time });
-          }
-        } else {
-          // For future dates, include all times
-          times.push({ value: timeValue, label: time });
-        }
-      }
-    }
-    
-    // Evening times (8:00 PM to 10:00 PM)
-    for (let hour = 20; hour <= 22; hour++) {
-      for (let minute = 0; minute < 60; minute += 30) {
-        const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        const timeValue = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        
-        // If it's today, check if the time has already passed
-        if (isToday) {
-          const timeToCheck = new Date();
-          timeToCheck.setHours(hour, minute, 0, 0);
-          if (timeToCheck > now) {
-            times.push({ value: timeValue, label: time });
-          }
-        } else {
-          // For future dates, include all times
-          times.push({ value: timeValue, label: time });
-        }
-      }
-    }
-    
-    return times;
-  };
-
-// ... existing code ...
-
-  // Get available times for the selected date
-  const availableTimes = generateTimeOptions(formData.date);
 
   // Function to open the date picker when clicking on the date input
   const openDatePicker = () => {
@@ -201,6 +281,19 @@ const ReservationForm = () => {
       <div className="reserve-table-content">
         <h1>Reserve a Table</h1>
         <p>Book your perfect dining experience with us</p>
+        
+        {/* Cancellation notification */}
+        {showCancellationMessage && (
+          <div className="cancellation-notification">
+            <p>Your reservation has been successfully cancelled.</p>
+            <button 
+              className="close-notification-btn" 
+              onClick={() => setShowCancellationMessage(false)}
+            >
+              ×
+            </button>
+          </div>
+        )}
         
         <form onSubmit={handleSubmit} className="reservation-form">
           <div className="form-group">
@@ -226,25 +319,90 @@ const ReservationForm = () => {
             <div className="time-radio-group">
               {!formData.date ? (
                 <p className="time-placeholder">Please select a date first</p>
+              ) : isLoadingTimes ? (
+                <p className="time-placeholder">Loading available times...</p>
               ) : availableTimes.length === 0 ? (
                 <p className="time-placeholder">No available times for this date</p>
               ) : (
-                availableTimes.map((time) => (
-                  <div key={time.value} className="radio-option">
-                    <input
-                      type="radio"
-                      id={`time-${time.value}`}
-                      name="time"
-                      value={time.value}
-                      checked={formData.time === time.value}
-                      onChange={handleTimeChange}
-                      className="radio-input"
-                    />
-                    <label htmlFor={`time-${time.value}`} className="radio-label">
-                      {time.label}
-                    </label>
-                  </div>
-                ))
+                <>
+                  <p className="time-availability-note">
+                    Available times for {formData.date} (times may vary daily)
+                  </p>
+                  {/* <p className="time-count-note">
+                    {availableTimes.length} time slots available {formData.date === new Date().toISOString().split('T')[0] ? 'for today (filtered by current UTC time)' : 'for this date'}
+                  </p> */}
+
+                  {/* Separate lunch and dinner times */}
+                  {(() => {
+                    const lunchTimes = availableTimes.filter(time => {
+                      const hour = parseInt(time.split(':')[0]);
+                      return hour >= 12 && hour <= 14;
+                    });
+                    
+                    const dinnerTimes = availableTimes.filter(time => {
+                      const hour = parseInt(time.split(':')[0]);
+                      return hour >= 20 && hour <= 22;
+                    });
+                    
+                    return (
+                      <div className="meal-periods-container">
+                        {/* Lunch Section */}
+                        {lunchTimes.length > 0 && (
+                          <div className="meal-period-section lunch">
+                            <div className="meal-period-header lunch">
+                              Lunch (12:00 PM - 2:00 PM)
+                            </div>
+                            <div className="meal-period-times">
+                              {lunchTimes.map((time) => (
+                                <div key={time} className="radio-option">
+                                  <input
+                                    type="radio"
+                                    id={`time-${time}`}
+                                    name="time"
+                                    value={time}
+                                    checked={formData.time === time}
+                                    onChange={handleTimeChange}
+                                    className="radio-input"
+                                  />
+                                  <label htmlFor={`time-${time}`} className="radio-label">
+                                    {time}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* Dinner Section */}
+                        {dinnerTimes.length > 0 && (
+                          <div className="meal-period-section dinner">
+                            <div className="meal-period-header dinner">
+                              Dinner (8:00 PM - 10:00 PM)
+                            </div>
+                            <div className="meal-period-times">
+                              {dinnerTimes.map((time) => (
+                                <div key={time} className="radio-option">
+                                  <input
+                                    type="radio"
+                                    id={`time-${time}`}
+                                    name="time"
+                                    value={time}
+                                    checked={formData.time === time}
+                                    onChange={handleTimeChange}
+                                    className="radio-input"
+                                  />
+                                  <label htmlFor={`time-${time}`} className="radio-label">
+                                    {time}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+                </>
               )}
             </div>
             {errors.time && <span className="error-message">{errors.time}</span>}
@@ -290,6 +448,56 @@ const ReservationForm = () => {
             {errors.numberOfPeople && <span className="error-message">{errors.numberOfPeople}</span>}
           </div>
 
+          {/* Contact Information Section */}
+          <div className="form-contact-section">
+            <h3 className="form-contact-section-title">Contact Information</h3>
+            
+            <div className="form-group">
+              <label htmlFor="name">Full Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className={`form-input ${errors.name ? 'error' : ''}`}
+                placeholder="Enter your full name"
+              />
+              {errors.name && <span className="error-message">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className={`form-input ${errors.email ? 'error' : ''}`}
+                placeholder="Enter your email address"
+              />
+              {errors.email && <span className="error-message">{errors.email}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number (Optional)</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="form-input"
+                placeholder="Enter your phone number"
+              />
+            </div>
+          </div>
+
+          <p className="required-fields-note">* indicates required fields</p>
+          
           <button 
             type="submit" 
             className="submit-btn"

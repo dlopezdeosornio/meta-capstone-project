@@ -7,7 +7,7 @@
 }
 
 .reserve-table-content {
-  max-width: 90vw;
+  max-width: 50vw;
   margin: 0 auto;
   background: var(--color-background);
   border-radius: var(--radius-2xl);
@@ -52,6 +52,16 @@
   margin-right: auto;
 }
 
+.required-fields-note {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-align: center;
+  margin-bottom: var(--spacing-6);
+  font-style: italic;
+  opacity: 0.7;
+  font-weight: var(--font-weight-normal);
+}
+
 /* Form Styles */
 .reservation-form {
   display: flex;
@@ -71,6 +81,7 @@
   font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
   margin-bottom: var(--spacing-1);
   letter-spacing: 0.01em;
+  align-self: flex-start;
 }
 
 .form-input {
@@ -180,9 +191,11 @@
 /* Radio button styling for time selection */
 .time-radio-group {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-4) var(--spacing-6);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
   margin-top: var(--spacing-2);
+  width: 100%;
 }
 
 .radio-option {
@@ -254,8 +267,205 @@
   font-weight: var(--font-weight-normal);
 }
 
+.time-availability-note {
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: rgba(244, 206, 20, 0.1);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(244, 206, 20, 0.3);
+  font-weight: var(--font-weight-medium);
+  width: 100%;
+  align-self: flex-start;
+  margin: 0 0 0 0 !important;
+  width:fit-content;
+}
+
+.time-count-note {
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  text-align: center;
+  margin-bottom: var(--spacing-3);
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.8;
+}
+
+/* Meal period sections */
+.meal-period-section {
+  margin-bottom: var(--spacing-6);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+}
+
+.meal-periods-container {
+  display: flex;
+  gap: var(--spacing-6);
+  width: 100%;
+}
+
+.meal-period-section.lunch {
+  border-color: var(--color-accent);
+  background: rgba(244, 206, 20, 0.05);
+}
+
+.meal-period-section.dinner {
+  border-color: var(--color-accent);
+  background: rgba(244, 206, 20, 0.05);
+}
+
+.meal-period-header {
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meal-period-header.lunch {
+  background: rgba(244, 206, 20, 0.2);
+  color: var(--color-accent);
+  border: 1px solid rgba(244, 206, 20, 0.3);
+}
+
+.meal-period-header.dinner {
+  background: rgba(244, 206, 20, 0.2);
+  color: var(--color-accent);
+  border: 1px solid rgba(244, 206, 20, 0.3);
+}
+
+.meal-period-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3) var(--spacing-4);
+  justify-content: flex-start;
+}
+
+/* Cancellation Notification Styles */
+.cancellation-notification {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #38a169;
+  position: relative;
+  overflow: hidden;
+  animation: slideInDown 0.5s ease-out;
+}
+
+.cancellation-notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #48bb78, #38a169);
+}
+
+.cancellation-notification p {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+}
+
+.close-notification-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  transition: all var(--transition-normal);
+  margin-left: var(--spacing-4);
+}
+
+.close-notification-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.close-notification-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contact Section Styles */
+.form-contact-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  gap: var(--spacing-6);
+}
+
+
+.form-contact-section-title {
+  color: var(--color-primary);
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: var(--spacing-6);
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.form-contact-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+  border-radius: 1px;
+}
+
+.form-contact-section label {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
+  margin-bottom: var(--spacing-1);
+  letter-spacing: 0.01em;
+  align-self: flex-start;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+  .meal-periods-container {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+  
   .reserve-table-container {
     padding: var(--spacing-6) var(--spacing-4);
     min-height: 90vh;
@@ -265,6 +475,8 @@
     padding: var(--spacing-8) var(--spacing-6);
     margin: 0 var(--spacing-2);
     border-radius: var(--radius-xl);
+    justify-self: center;
+    max-width: 75vw;
   }
   
   .reserve-table-content h1 {
@@ -275,6 +487,26 @@
   .reserve-table-content p {
     font-size: clamp(var(--font-size-base), 4vw, var(--font-size-lg));
     margin-bottom: var(--spacing-8);
+  }
+  
+  .cancellation-notification {
+    padding: var(--spacing-3) var(--spacing-4);
+    margin-bottom: var(--spacing-5);
+  }
+  
+  .cancellation-notification p {
+    font-size: var(--font-size-base);
+  }
+  
+  .close-notification-btn {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-lg);
+  }
+  
+  .required-fields-note {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-5);
   }
   
   .form-input {
@@ -289,6 +521,30 @@
   
   .time-radio-group {
     gap: var(--spacing-3) var(--spacing-4);
+  }
+  
+  .meal-period-section {
+    padding: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .meal-period-header {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .meal-period-times {
+    gap: var(--spacing-2) var(--spacing-3);
+  }
+  
+  .form-contact-section {
+    padding: var(--spacing-4);
+    margin-top: var(--spacing-4);
+  }
+  
+  .form-contact-section-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-4);
   }
 }
 
@@ -314,6 +570,30 @@
     margin-bottom: var(--spacing-6);
   }
   
+  .cancellation-notification {
+    padding: var(--spacing-3) var(--spacing-4);
+    margin-bottom: var(--spacing-4);
+    flex-direction: column;
+    gap: var(--spacing-2);
+    text-align: center;
+  }
+  
+  .cancellation-notification p {
+    font-size: var(--font-size-sm);
+  }
+  
+  .close-notification-btn {
+    width: 24px;
+    height: 24px;
+    font-size: var(--font-size-base);
+    margin-left: 0;
+  }
+  
+  .required-fields-note {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-4);
+  }
+  
   .form-group {
     gap: var(--spacing-1);
   }
@@ -335,6 +615,30 @@
   .radio-input {
     width: 1.25rem;
     height: 1.25rem;
+  }
+  
+  .meal-period-section {
+    padding: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .meal-period-header {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-1);
+  }
+  
+  .meal-period-times {
+    gap: var(--spacing-1) var(--spacing-2);
+  }
+  
+  .form-contact-section {
+    padding: var(--spacing-3);
+    margin-top: var(--spacing-3);
+  }
+  
+  .form-contact-section-title {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-3);
   }
   
   .radio-input:checked::after {
@@ -368,6 +672,26 @@
     margin-bottom: var(--spacing-5);
   }
   
+  .cancellation-notification {
+    padding: var(--spacing-2) var(--spacing-3);
+    margin-bottom: var(--spacing-3);
+  }
+  
+  .cancellation-notification p {
+    font-size: var(--font-size-xs);
+  }
+  
+  .close-notification-btn {
+    width: 20px;
+    height: 20px;
+    font-size: var(--font-size-sm);
+  }
+  
+  .required-fields-note {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-3);
+  }
+  
   .form-input {
     padding: var(--spacing-2);
     font-size: clamp(var(--font-size-xs), 5.5vw, var(--font-size-sm));
@@ -395,6 +719,16 @@
   .radio-label {
     font-size: clamp(var(--font-size-xs), 5.5vw, var(--font-size-sm));
   }
+  
+  .form-contact-section {
+    padding: var(--spacing-2);
+    margin-top: var(--spacing-2);
+  }
+  
+  .form-contact-section-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-2);
+  }
 }
 
 /* Animation for form elements */
@@ -417,9 +751,12 @@
 .form-group:nth-child(2) { animation-delay: 0.2s; }
 .form-group:nth-child(3) { animation-delay: 0.3s; }
 .form-group:nth-child(4) { animation-delay: 0.4s; }
+.form-group:nth-child(5) { animation-delay: 0.5s; }
+.form-group:nth-child(6) { animation-delay: 0.6s; }
+.form-group:nth-child(7) { animation-delay: 0.7s; }
 
 .submit-btn {
-  animation: fadeInUp 0.6s ease 0.5s forwards;
+  animation: fadeInUp 0.6s ease 0.8s forwards;
   opacity: 0;
 }
 

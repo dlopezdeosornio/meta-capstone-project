@@ -149,6 +149,8 @@ const ReservationForm = () => {
       
       if (result.success) {
         console.log('Reservation submitted:', formData);
+
+        //localStorage.setItem('reservationData', JSON.stringify(formData));
         
         // Navigate to confirmation page with form data as URL parameters
         const params = new URLSearchParams({

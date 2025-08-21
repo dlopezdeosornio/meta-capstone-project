@@ -74,6 +74,55 @@
     transform: translateX(4px);
 }
 
+/* Link styles using theme colors */
+.footer-section a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    font-weight: var(--font-weight-medium);
+}
+
+.footer-section a:hover,
+.footer-section a:focus {
+    color: var(--color-background);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.footer-section a:visited {
+    color: var(--color-background);
+}
+
+/* Social media links styling */
+.social-links-footer {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-3);
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link-footer {
+    display: inline-block;
+    padding: var(--spacing-2) var(--spacing-4);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    min-width: 120px;
+    text-align: center;
+}
+
+.social-link-footer:hover,
+.social-link-footer:focus {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-secondary);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .footer {
@@ -102,6 +151,11 @@
         font-size: clamp(var(--font-size-sm), 3.5vw, var(--font-size-base));
         margin: var(--spacing-1) 0;
     }
+    
+    .social-link-footer {
+        min-width: 100px;
+        padding: var(--spacing-2) var(--spacing-3);
+    }
 }
 
 @media (max-width: 480px) {
@@ -129,6 +183,12 @@
         font-size: clamp(var(--font-size-xs), 4vw, var(--font-size-sm));
         margin: var(--spacing-1) 0;
     }
+    
+    .social-link-footer {
+        min-width: 90px;
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-sm);
+    }
 }
 
 @media (max-width: 360px) {
@@ -155,5 +215,11 @@
     .footer-section p {
         font-size: clamp(var(--font-size-xs), 4.5vw, var(--font-size-sm));
         margin: var(--spacing-1) 0;
+    }
+    
+    .social-link-footer {
+        min-width: 80px;
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: var(--font-size-xs);
     }
 }

@@ -5,14 +5,14 @@ import "./header.css";
 
 function Header() {
     return (
-        <div className="header">
+        <header className="header" role="banner">
             <div className="logo-container">
-                <Link to="/">
-                    <img src={logo} alt="logo" className="logo"/>
+                <Link to="/" aria-label="Go to homepage">
+                    <img src={logo} alt="Little Lemon Restaurant Logo" className="logo"/>
                 </Link>
             </div>
             <h1>Little Lemon</h1>
-        </div>
+        </header>
     )
 }
 

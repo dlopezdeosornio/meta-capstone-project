@@ -12,16 +12,23 @@ import ContactSection from './components/Contact/Contact';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" role="application">
+        {/* Skip link for keyboard users */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        
         <Nav/>
         <Header/>
-        <Routes>
-          <Route path="/" element={<Homepage/>} />
-          <Route path="/reserve" element={<ReservationForm/>} />
-          <Route path="/booking-confirmation" element={<BookingConfirmation/>} />
-          <Route path="/menu" element={<Menu/>} />
-          <Route path="/contact" element={<ContactSection/>} />
-        </Routes>
+        <main id="main-content">
+          <Routes>
+            <Route path="/" element={<Homepage/>} />
+            <Route path="/reserve" element={<ReservationForm/>} />
+            <Route path="/booking-confirmation" element={<BookingConfirmation/>} />
+            <Route path="/menu" element={<Menu/>} />
+            <Route path="/contact" element={<ContactSection/>} />
+          </Routes>
+        </main>
         <Footer/>
       </div>
     </Router>

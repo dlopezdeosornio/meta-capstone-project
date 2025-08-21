@@ -72,6 +72,56 @@
   color: var(--color-primary);
 }
 
+/* Link styles using theme colors */
+.contact-section a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-section a:hover,
+.contact-section a:focus {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contact-section a:visited {
+  color: var(--color-primary);
+}
+
+/* Social media links styling */
+.social-links {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-3);
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link {
+  display: inline-block;
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--color-primary);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+  min-width: 120px;
+  text-align: center;
+}
+
+.social-link:hover,
+.social-link:focus {
+  color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-secondary);
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .contactSection {
@@ -98,6 +148,11 @@
   .contact-section p {
     font-size: clamp(var(--font-size-sm), 3.5vw, var(--font-size-base));
     margin-bottom: var(--spacing-2);
+  }
+  
+  .social-link {
+    min-width: 100px;
+    padding: var(--spacing-2) var(--spacing-3);
   }
 }
 
@@ -127,6 +182,12 @@
     font-size: clamp(var(--font-size-xs), 4.5vw, var(--font-size-sm));
     margin-bottom: var(--spacing-2);
   }
+  
+  .social-link {
+    min-width: 90px;
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+  }
 }
 
 @media (max-width: 360px) {
@@ -153,5 +214,11 @@
   .contact-section p {
     font-size: clamp(var(--font-size-xs), 5.5vw, var(--font-size-sm));
     margin-bottom: var(--spacing-1);
+  }
+  
+  .social-link {
+    min-width: 80px;
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-xs);
   }
 }

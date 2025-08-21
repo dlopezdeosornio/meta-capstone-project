@@ -77,38 +77,38 @@ const Menu = () => {
   ];
 
   const renderMenuSection = (title, items) => (
-    <div className="menu-section">
-      <h2 className="section-title">{title}</h2>
-      <div className="menu-items">
+    <section className="menu-section" aria-labelledby={`${title.toLowerCase().replace(/\s+/g, '-')}-title`}>
+      <h2 className="section-title" id={`${title.toLowerCase().replace(/\s+/g, '-')}-title`}>{title}</h2>
+      <div className="menu-items" role="list" aria-label={`${title} menu items`}>
         {items.map((item, index) => (
-          <div key={index} className="menu-item">
+          <article key={index} className="menu-item" role="listitem">
             <div className="item-header">
               <h3 className="item-name">{item.name}</h3>
-              <span className="item-price">{item.price}</span>
+              <span className="item-price" aria-label={`Price: ${item.price}`}>{item.price}</span>
             </div>
             <p className="item-description">{item.description}</p>
-          </div>
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 
   return (
-    <div className="menu-container">
-      <div className="menu-header">
+    <main className="menu-container" role="main">
+      <header className="menu-header">
         <h1 className="menu-title">Mediterranean Menu</h1>
         <p className="menu-subtitle">Authentic flavors from the Mediterranean coast</p>
-      </div>
+      </header>
       
       {renderMenuSection("Appetizers", appetizers)}
       {renderMenuSection("Main Courses", mainCourses)}
       {renderMenuSection("Desserts", desserts)}
       
-      <div className="menu-footer">
+      <footer className="menu-footer">
         <p>All dishes prepared with fresh, locally sourced ingredients</p>
         <p>Prices subject to change</p>
-      </div>
-    </div>
+      </footer>
+    </main>
   );
 };
 

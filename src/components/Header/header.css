@@ -1,135 +1,177 @@
-/* Header.css */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--spacing-4);
-    padding: var(--spacing-2) var(--spacing-4);
-    background: linear-gradient(135deg, var(--color-primary) 0%, #3d4f47 100%);
-    border-bottom: 3px solid var(--color-secondary);
-    box-shadow: var(--shadow-lg);
-    min-height: 16vh;
-    position: relative;
-    overflow: hidden;
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(244, 206, 20, 0.05) 50%, transparent 70%);
-    pointer-events: none;
-}
-  
-.header .logo-container {
+    background: #495E57;
+    /* padding: 4rem 2rem; */
     display: flex;
     align-items: center;
     position: relative;
-    z-index: 1;
+    overflow: visible;
+    margin-bottom: 3vh;
 }
 
-.header .logo-container a {
-    text-decoration: none;
+.header-container {
     display: flex;
-    align-items: center;
-    transition: transform var(--transition-normal);
+    align-items: flex-start;
+    justify-content: center;
+    width: 100vw;
+    height: 35vh;
+    margin: 2vh 4vw;
+    margin-bottom: 0;
+    gap: 20vw;
+    position: relative;
+    padding-right: 10vw;
 }
 
-.header .logo-container a:hover {
-    transform: scale(1.05);
+.header-content {
+    flex: 1;
+    max-width: 50vw;
+    padding-left: 4rem;
+    padding-top: 2rem;
+    justify-items: left;
+    align-items: flex-start;
 }
 
-.header .logo-container img {
-    height: clamp(3rem, 6vh, 4.5rem);
-    width: auto;
-    background: var(--color-background);
-    padding: var(--spacing-3);
-    border-radius: var(--radius-lg);
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-md);
-    border: 2px solid var(--color-secondary);
-    transition: all var(--transition-normal);
-}
-
-.header .logo-container img:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-2px);
-}
-  
 .header h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
-    color: var(--color-secondary);
-    margin: 0;
-    letter-spacing: -0.025em;
-    white-space: nowrap;
-    font-weight: var(--font-weight-semibold);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: color var(--transition-normal);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #F4CE14;
+    margin: 0 0 0.5rem 0;
     line-height: 1.1;
+    text-align: left;
 }
 
-.header h1:hover {
-    color: #fff2ae;
+.header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
 }
-  
+
+.header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    color: #ffffff;
+    margin: 0 0 2rem 0;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.reserve-btn {
+    background: #F4CE14;
+    color: #4A5568;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    justify-self: left;
+}
+
+.reserve-btn:hover {
+    background: #e6c012;
+}
+
+.header-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+}
+
+.header-image img {
+    /* max-height: 40vh;
+    max-width: 45vw; */
+    width: auto;
+    height: 40vh;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(2rem);
+}
+
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .header {
-        padding: var(--spacing-2) var(--spacing-3);
-        min-height: 18vh;
-        gap: var(--spacing-3);
+        padding: 3rem 2rem;
     }
     
-    .header .logo-container img {
-        height: clamp(2.5rem, 5vh, 3.5rem);
-        padding: var(--spacing-3);
+    .header-container {
+        gap: 3rem;
     }
-  
+    
     .header h1 {
-        font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-4xl));
+        font-size: 3rem;
+    }
+    
+    .header-image img {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 2.5rem 1.5rem;
+        min-height: 50vh;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .header-content {
+        max-width: 100%;
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .header p {
+        font-size: 1rem;
+    }
+    
+    .header-image img {
+        max-width: 300px;
     }
 }
 
 @media (max-width: 480px) {
     .header {
-        padding: var(--spacing-2) var(--spacing-2);
-        min-height: 20vh;
-        gap: var(--spacing-2);
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .header .logo-container img {
-        height: clamp(2.25rem, 6vh, 3rem);
-        padding: var(--spacing-3);
-    }
-  
-    .header h1 {
-        font-size: clamp(var(--font-size-xl), 7vw, var(--font-size-3xl));
-        white-space: normal;
-        word-wrap: break-word;
-        max-width: 100%;
-        text-align: center;
-    }
-}
-
-@media (max-width: 360px) {
-    .header {
-        padding: var(--spacing-1) var(--spacing-1);
-        min-height: 22vh;
-    }
-    
-    .header .logo-container img {
-        height: clamp(2rem, 7vh, 2.75rem);
+        padding: 2rem 1rem;
+        min-height: 45vh;
     }
     
     .header h1 {
-        font-size: clamp(var(--font-size-lg), 8vw, var(--font-size-2xl));
+        font-size: 2rem;
+    }
+    
+    .header h2 {
+        font-size: 1.125rem;
+    }
+    
+    .header p {
+        font-size: 0.875rem;
+    }
+    
+    .reserve-btn {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .header-image img {
+        max-width: 250px;
     }
 }
   

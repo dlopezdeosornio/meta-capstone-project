@@ -32,28 +32,15 @@ function BookingConfirmation() {
             </div>
             <section className="booking-confirmation-details" aria-labelledby="booking-details-heading">
                 <h2 id="booking-details-heading">Booking Details</h2>
-                <dl>
-                    <dt>Date:</dt>
-                    <dd>{date}</dd>
-                    
-                    <dt>Time:</dt>
-                    <dd>{time}</dd>
-                    
-                    <dt>Number of Guests:</dt>
-                    <dd>{numberOfGuests}</dd>
-                    
-                    <dt>Occasion:</dt>
-                    <dd>{occasion}</dd>
-                    
-                    <dt>Name:</dt>
-                    <dd>{name}</dd>
-                    
-                    <dt>Email:</dt>
-                    <dd>{email}</dd>
-                    
-                    <dt>Phone:</dt>
-                    <dd>{phone}</dd>
-                </dl>
+                <ul>
+                    <li>Date: {date}</li>
+                    <li>Time: {time}</li>
+                    <li>Number of Guests: {numberOfGuests}</li>
+                    <li>Occasion: {occasion}</li>
+                    <li>Name: {name}</li>
+                    <li>Email: {email}</li>
+                    <li>Phone: {phone}</li>
+                </ul>
             </section>
             <div className="booking-cancel-button">
                 <button 
@@ -61,6 +48,11 @@ function BookingConfirmation() {
                     aria-label="Cancel your reservation"
                 >
                     Cancel Reservation
+                </button>
+            </div>
+            <div className="home-button">
+                <button className="home-button" onClick={() => navigate('/')}>
+                    Back to Homepage
                 </button>
             </div>
         </main>

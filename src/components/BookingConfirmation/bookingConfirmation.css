@@ -13,6 +13,7 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-top: 6vh;
 }
 
 
@@ -70,6 +71,12 @@
 
 
 /* Booking details section - now integrated within main container */
+.booking-confirmation-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .booking-confirmation-details {
   background: var(--color-surface);
   border-radius: var(--radius-xl);
@@ -103,7 +110,7 @@
   line-height: var(--line-height-tight);
 }
 
-.booking-confirmation-details p {
+.booking-confirmation-details li {
   color: var(--color-text-secondary);
   font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
   line-height: var(--line-height-relaxed);
@@ -116,7 +123,7 @@
   transition: all var(--transition-normal);
 }
 
-.booking-confirmation-details p:hover {
+.booking-confirmation-details li:hover {
   background: rgba(244, 206, 20, 0.05);
   transform: translateX(4px);
   border-left-color: var(--color-accent);
@@ -128,7 +135,7 @@
   opacity: 0;
 }
 
-.booking-cancel-button button {
+.booking-cancel-button > button {
   background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
   color: white;
   border: none;
@@ -146,7 +153,7 @@
   overflow: hidden;
 }
 
-.booking-cancel-button button::before {
+.booking-cancel-button > button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -157,19 +164,74 @@
   transition: left var(--transition-slow);
 }
 
-.booking-cancel-button button:hover {
+.booking-cancel-button > button:hover {
   background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
 }
 
-.booking-cancel-button button:hover::before {
+.booking-cancel-button > button:hover::before {
   left: 100%;
 }
 
-.booking-cancel-button button:active {
+.booking-cancel-button > button:active {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Home button - styled to match page theme */
+.home-button {
+  animation: fadeInUp 0.8s ease 0.8s forwards;
+  opacity: 0;
+  margin-top: var(--spacing-4);
+}
+
+.home-button > button {
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  padding: var(--spacing-4) var(--spacing-8);
+  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-lg);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-button > button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.home-button > button:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.home-button > button:hover::before {
+  left: 100%;
+}
+
+.home-button > button:active {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-button > button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 
@@ -224,6 +286,11 @@
     padding: var(--spacing-3) var(--spacing-6);
     font-size: clamp(var(--font-size-base), 4vw, var(--font-size-lg));
   }
+  
+  .home-button > button {
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: clamp(var(--font-size-base), 4vw, var(--font-size-lg));
+  }
 }
 
 @media (max-width: 480px) {
@@ -272,7 +339,12 @@
     padding: var(--spacing-2);
   }
   
-  .booking-cancel-button button {
+  .booking-cancel-button > button {
+    padding: var(--spacing-3) var(--spacing-5);
+    font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-base));
+  }
+  
+  .home-button > button {
     padding: var(--spacing-3) var(--spacing-5);
     font-size: clamp(var(--font-size-sm), 5vw, var(--font-size-base));
   }
@@ -324,7 +396,12 @@
     padding: var(--spacing-1);
   }
   
-  .booking-cancel-button button {
+  .booking-cancel-button > button {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: clamp(var(--font-size-xs), 6vw, var(--font-size-sm));
+  }
+  
+  .home-button > button {
     padding: var(--spacing-2) var(--spacing-4);
     font-size: clamp(var(--font-size-xs), 6vw, var(--font-size-sm));
   }
@@ -343,7 +420,7 @@
 }
 
 /* Focus states for accessibility */
-.booking-cancel-button button:focus-visible {
+.booking-cancel-button >button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }

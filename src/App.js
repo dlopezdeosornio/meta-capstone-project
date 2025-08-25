@@ -1,13 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Homepage from './components/Homepage/Homepage';
-import ReservationForm from './components/ReservationForm/ReservationForm';
-import BookingConfirmation from './components/BookingConfirmation/BookingConfirmation';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Menu from './components/Menu/Menu';
-import ContactSection from './components/Contact/Contact';
+import Homepage from './Pages/Homepage';
+import TableReservation from './Pages/TableReservation';
+import ReservationConfirm from './Pages/ReservationConfirm';
+import Contact from './Pages/Contact';
 
 function App() {
   return (
@@ -23,10 +23,11 @@ function App() {
         <main id="main-content">
           <Routes>
             <Route path="/" element={<Homepage/>} />
-            <Route path="/reserve" element={<ReservationForm/>} />
-            <Route path="/booking-confirmation" element={<BookingConfirmation/>} />
+            {/* <Route path="/about" element={<AboutUs/>} /> */}
+            <Route path="/reserve" element={<TableReservation/>} />
+            <Route path="/booking-confirmation" element={<ReservationConfirm/>} />
             <Route path="/menu" element={<Menu/>} />
-            <Route path="/contact" element={<ContactSection/>} />
+            <Route path="/contact" element={<Contact/>} />
           </Routes>
         </main>
         <Footer/>

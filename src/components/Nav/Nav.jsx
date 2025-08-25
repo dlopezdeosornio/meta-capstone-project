@@ -1,15 +1,46 @@
 import "./nav.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import logo from "../../assets/Logos/logo.jpg";
 
 function Nav() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    const isActive = (path) => {
+        if (path === '/') {
+            return location.pathname === '/';
+        }
+        return location.pathname.startsWith(path);
+    };
+
     return (
-        <nav className="nav" role="navigation" aria-label="Main navigation">
-            <ul>
-                <li><Link to="/" aria-label="Go to homepage">Home</Link></li>
-                <li><Link to="/menu" aria-label="View our menu">Menu</Link></li>
-                <li><Link to="/reserve" aria-label="Reserve a table">Reserve a table</Link></li>
-                <li><Link to="/contact" aria-label="Contact us">Contact</Link></li>
-            </ul>
+        <nav className="main-nav" role="navigation" aria-label="Main navigation">
+            <div className="main-nav-container">
+                <div className="logo-container">
+                    <Link to="/" aria-label="Go to homepage">
+                        <img src={logo} alt="Little Lemon Restaurant Logo" className="logo"/>
+                    </Link>
+                </div>
+                
+                <ul className="main-nav-links">
+                    <li><Link to="/" className={isActive('/') ? 'active' : ''} aria-label="Go to homepage">Home</Link></li>
+                    <li><Link to="/menu" className={isActive('/menu') ? 'active' : ''} aria-label="View our menu">Menu</Link></li>
+                    <li><Link to="/reserve" className={isActive('/reserve') ? 'active' : ''} aria-label="Reserve a table">Reservations</Link></li>
+                    <li><Link to="/order" className={isActive('/order') ? 'active' : ''} aria-label="Order Online">Order Online</Link></li>
+                    <li><Link to="/contact" className={isActive('/contact') ? 'active' : ''} aria-label="Contact us">Contact</Link></li>
+                </ul>
+                
+                <div className="main-nav-actions">
+                    <div className="cart-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="#4A5568" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="#4A5568" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="#4A5568" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <div className="cart-plus">+</div>
+                    </div>
+                </div>
+            </div>
         </nav>
     )
 }
